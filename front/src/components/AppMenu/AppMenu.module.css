@@ -1,0 +1,32 @@
+.app-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.link {
+  color: white;
+  text-decoration: none;
+}
+
+.active {
+  display: none;
+}
+
+.button {
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+.button:hover {
+  border: none;
+  background: none;
+}
+
+.app-menu .button:active,
+.button:focus {
+  border: none;
+  background: none;
+}

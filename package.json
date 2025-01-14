@@ -1,0 +1,20 @@
+{
+  "name": "crm-f21",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server-npm-i": "cd back && npm i",
+    "client-npm-i": "cd front && npm i",
+    "install": "concurrently \"npm run server-npm-i\" \"npm run client-npm-i\"",
+    "server": "cd back && npm run develop",
+    "client": "cd front && npm run dev",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

@@ -1,0 +1,38 @@
+@API = http://localhost:1337/api
+@user02-Token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzM2NzE5NjUzLCJleHAiOjE3MzkzMTE2NTN9.f8OBKl6lljYCirpGKs-ywTYF4K302t51FkpbxvOZg1g
+
+###Client
+###Strapi Get Clients
+GET {{API}}/clients
+Authorization: Bearer {{user02-Token}}
+Content-Type: application/json
+
+###Strapi Create Client
+POST {{API}}/clients
+Authorization: Bearer {{user02-Token}}
+Content-Type: application/json
+
+{
+  "data": {
+    "name": "Львов Лев Львович",
+    "company": "Leo Partners",
+    "email": "leo@leo.ai"
+  }
+}
+
+###Strapi Delete Client
+DELETE {{API}}/clients/l59icxpsak379o0uykigl7w3
+Authorization: Bearer {{user02-Token}}
+
+###Strapi Update Client
+PUT {{API}}/clients/r61yjvjmrnmvrsxmc0mhxaxe
+Authorization: Bearer {{user02-Token}}
+Content-Type: application/json
+
+{
+  "data": {
+    "company": "FROL",
+    "email": "frol@frolov.ru",
+    "name": "Фролов Фрол Яванович"
+  }
+}
