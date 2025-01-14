@@ -11,6 +11,10 @@
 3. Просмотр детальной информации клиента.
 4. Сортировка списка клиентов по полю "name".
 5. Авторизация с возможностью распределения ролей (используется CMS Strapi 5)
+![Снимок экрана 2025-01-14 в 20 48 16](https://github.com/user-attachments/assets/593b0a84-bd5b-49d7-9a61-b89e71c5ad64)
+![Снимок экрана 2025-01-14 в 20 48 55](https://github.com/user-attachments/assets/98b2945e-2e6a-49d2-81f6-d4e8e8e20899)
+![Снимок экрана 2025-01-14 в 20 49 40](https://github.com/user-attachments/assets/c83fd862-bc91-4512-870a-c658a696b71b)
+![Снимок экрана 2025-01-14 в 20 50 23](https://github.com/user-attachments/assets/67ee939e-fea1-4374-9737-9ca971a56b41)
 
 ### Инструменты
 
