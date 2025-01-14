@@ -14,9 +14,6 @@ import { store } from './store/store.ts';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ClientForm from './pages/ClientForm/ClientForm.tsx';
-import { getClients } from './store/client.slice.ts';
-
-store.dispatch(getClients());
 
 const router = createBrowserRouter([
   {
