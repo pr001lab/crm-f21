@@ -21,7 +21,7 @@ export enum AppRoute {
   SignUp = '/sign-up',
   Client = '/client',
   ClientId = '/client/:id',
-  AddClient = '/add-client/'
+  AddClient = '/add-client/',
 }
 
 export enum LabelsMenu {
@@ -29,5 +29,14 @@ export enum LabelsMenu {
   AddClient = 'Add Client',
   Logout = 'Logout',
   Login = 'Login',
-  SignUp = 'SignUp'
+  SignUp = 'SignUp',
+}
+
+export enum SortEnum {
+  Ascending = 'Ascending',
+  Descending = 'Descending',
+}
+
+export enum ParamNames {
+  SearchFullText = 'q',
 }

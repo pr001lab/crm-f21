@@ -36,3 +36,8 @@ Content-Type: application/json
     "name": "Фролов Фрол Яванович"
   }
 }
+
+###Strapi Find Clients
+GET {{API}}/clients?filters[name][$containsi]=ро
+Authorization: Bearer {{user02-Token}}
+Content-Type: application/json

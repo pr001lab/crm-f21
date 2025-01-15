@@ -18,23 +18,29 @@ const initialState: IInitialState = {
 
 export const getClients = createAsyncThunk<
   IClientProps[],
-  void,
+  { params: URLSearchParams },
   {
     state: RootState;
   }
->('client/getClients', async (_, thunkAPI) => {
+>('client/getClients', async ({ params = {} }, thunkAPI) => {
   const jwt = thunkAPI.getState().user.jwt;
+  const searchParams = decodeURIComponent(params.toString()).slice(2);
+  const filterParams = `?filters[name][$containsi]=`;
+
   try {
-    const { data } = await axios.get(`${API}${APIRoute.Clients}`, {
-      headers: {
-        Authorization: `Bearer ${jwt}`,
+    const { data } = await axios.get(
+      `${API}${APIRoute.Clients}${filterParams}${searchParams}`,
+      {
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+        },
       },
-    });
+    );
 
     return data.data;
-  } catch (e) {
-    if (e instanceof AxiosError) {
-      throw new Error(e.response?.data.message);
+  } catch (err) {
+    if (err instanceof AxiosError) {
+      throw new Error(err.response?.data.message);
     }
   }
 });

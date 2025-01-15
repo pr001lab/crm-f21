@@ -1,57 +1,35 @@
-import { Button, Table } from 'react-bootstrap';
-import React, { useEffect, useState } from 'react';
-import CatalogItem from '../../components/CatalogItem/CatalogItem.tsx';
-import { IClientProps } from '../../types/client.ts';
-import { toast } from 'react-toastify';
-import { socket } from '../config/socket.ts';
+import { Table } from 'react-bootstrap';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState, store } from '../../store/store.ts';
-import { getProfileUser } from '../../store/user.slice.ts';
 import Heading from '../../components/common/Heading/Heading.tsx';
-import { clientActions, getClients } from '../../store/client.slice.ts';
-
-import { ChevronDown, ChevronUp } from 'react-feather';
-
-export interface SortProps {
-  children: React.ReactNode;
-  sortType?: string;
-}
+import CatalogList from '../../components/CatalogList/CatalogList.tsx';
+import { LoadingStatus, ParamNames } from '../../constant.ts';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { getClients } from '../../store/client.slice.ts';
 
 const Catalog = () => {
-  const { jwt } = useSelector((state: RootState) => state.user);
-  const { items: clients } = useSelector((state: RootState) => state.client);
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const q = searchParams.get('q');
+
+  const { items: clients, loadingStatus } = useSelector(
+    (state: RootState) => state.client,
+  );
   const dispatch = useDispatch<AppDispatch>();
-  const [sortType, setSortType] = useState<string>('');
 
   useEffect(() => {
-    if (jwt) {
-      store.dispatch(getProfileUser());
+    const urlSearchParams = new URLSearchParams();
+    if (q) {
+      urlSearchParams.append(ParamNames.SearchFullText, q);
+    } else {
+      urlSearchParams.delete(ParamNames.SearchFullText);
     }
-  }, [jwt]);
 
-  useEffect(() => {
-    store.dispatch(getClients());
-  }, []);
+    store.dispatch(getClients({ params: urlSearchParams }));
+  }, [dispatch, navigate, q]);
 
-  useEffect(() => {
-    socket.on('SocketUserConnected', (res) => {
-      const data = JSON.parse(res);
-      toast.success(data.message, {
-        toastId: 'SocketUserConnected',
-      });
-    });
-  }, []);
-
-  useEffect(() => {
-    socket.on('newClientAdded', (res) => {
-      toast.info('A new client has been added', {
-        toastId: 'newClientAdded',
-      });
-      dispatch(clientActions.addItem(res.client));
-    });
-  }, []);
-
-  if (clients.length === 0) {
+  if (clients.length === 0 && loadingStatus === LoadingStatus.Successed) {
     return (
       <>
         <Heading>Client List</Heading>
@@ -60,69 +38,15 @@ const Catalog = () => {
     );
   }
 
+  if (loadingStatus !== LoadingStatus.Successed) {
+    return;
+  }
+
   return (
-    <>
-      <Heading>Client List</Heading>
-      <Table responsive>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>
-              name
-              <Button
-                variant='link'
-                className='px-1 py-0'
-                onClick={() => setSortType('asc')}
-              >
-                <ChevronDown color='#212529' />
-              </Button>
-              <Button
-                variant='link'
-                className='px-1 py-0'
-                onClick={() => setSortType('desc')}
-              >
-                <ChevronUp color='#212529' />
-              </Button>
-            </th>
-            <th>company</th>
-            <th>email</th>
-            <th>action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <Sort sortType={sortType}>
-            {clients.map((client: IClientProps, idx) => (
-              <CatalogItem key={client.documentId} {...client} num={idx + 1} />
-            ))}
-          </Sort>
-        </tbody>
-      </Table>
-    </>
+    <Table responsive>
+      <CatalogList clients={clients} />
+    </Table>
   );
-};
-
-const ascCompare = (aRaw, bRaw) => {
-  const a = aRaw.props['name'];
-  const b = bRaw.props['name'];
-  return a.localeCompare(b);
-};
-
-const descCompare = (aRaw, bRaw) => {
-  const a = aRaw.props['name'];
-  const b = bRaw.props['name'];
-  return b.localeCompare(a);
-};
-
-const Sort = ({ children, sortType }: SortProps) => {
-  if (!sortType) {
-    return children;
-  }
-  if (sortType === 'asc') {
-    return React.Children.toArray(children).sort(ascCompare);
-  }
-  if (sortType === 'desc') {
-    return React.Children.toArray(children).sort(descCompare);
-  }
 };
 
 export default Catalog;

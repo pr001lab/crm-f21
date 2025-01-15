@@ -5,7 +5,6 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Layout from './layouts/Layout/Layout.tsx';
 import AuthForm from './pages/AuthForm/AuthForm.tsx';
 import AuthLayout from './layouts/AuthLayout/AuthLayout.tsx';
-import Catalog from './pages/Catalog/Catalog.tsx';
 import ErrorPage from './pages/Error/ErrorPage.tsx';
 import { AppRoute } from './constant.ts';
 import { RequireAuth } from './components/RequireAuth/RequireAuth.tsx';
@@ -14,6 +13,7 @@ import { store } from './store/store.ts';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ClientForm from './pages/ClientForm/ClientForm.tsx';
+import Main from './pages/Main/Main.tsx';
 
 const router = createBrowserRouter([
   {
@@ -26,7 +26,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: AppRoute.Main,
-        element: <Catalog />,
+        element: <Main />,
       },
       {
         path: AppRoute.AddClient,
