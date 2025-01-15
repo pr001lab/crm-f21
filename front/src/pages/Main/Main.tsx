@@ -35,7 +35,7 @@ const Main = () => {
       });
       dispatch(clientActions.addItem(res.client));
     });
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
