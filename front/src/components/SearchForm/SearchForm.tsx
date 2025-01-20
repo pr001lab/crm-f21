@@ -4,6 +4,7 @@ import { AppRoute, ParamNames } from '../../constant.ts';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { AppDispatch } from '../../store/store.ts';
 import { useDispatch } from 'react-redux';
+import { CgSearch } from 'react-icons/cg';
 
 function SearchForm() {
   const navigate = useNavigate();
@@ -42,7 +43,13 @@ function SearchForm() {
   };
 
   return (
-    <Form.Group className='mb-3' controlId='exampleForm.ControlInput1'>
+    <Form.Group
+      className='d-flex align-items-center gap-2 mb-3'
+      controlId='exampleForm.ControlInput1'
+    >
+      <Form.Label className='m-0'>
+        <CgSearch size={24} />
+      </Form.Label>
       <Form.Control
         name='search-input'
         type='text'

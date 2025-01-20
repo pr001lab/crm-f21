@@ -3,8 +3,8 @@ import { IClientProps } from '../../types/client.ts';
 import CatalogItem from '../CatalogItem/CatalogItem.tsx';
 import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
-import { ChevronDown, ChevronUp } from 'react-feather';
 import { SortEnum } from '../../constant.ts';
+import { CgSortAz, CgSortZa } from 'react-icons/cg';
 
 function CatalogList({ clients }: CatalogListProps) {
   const [sortedClients, setSortedClients] = useState(clients);
@@ -31,14 +31,14 @@ function CatalogList({ clients }: CatalogListProps) {
               className='px-1 py-0'
               onClick={() => setSortType(SortEnum.Ascending)}
             >
-              <ChevronDown color='#212529' />
+              <CgSortAz size={24} />
             </Button>
             <Button
               variant='link'
               className='px-1 py-0'
               onClick={() => setSortType(SortEnum.Descending)}
             >
-              <ChevronUp color='#212529' />
+              <CgSortZa size={24} />
             </Button>
           </th>
           <th>company</th>
