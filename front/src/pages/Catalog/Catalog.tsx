@@ -2,7 +2,6 @@ import { Table } from 'react-bootstrap';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState, store } from '../../store/store.ts';
-import Heading from '../../components/common/Heading/Heading.tsx';
 import CatalogList from '../../components/CatalogList/CatalogList.tsx';
 import { LoadingStatus, ParamNames } from '../../constant.ts';
 import { useNavigate, useSearchParams } from 'react-router-dom';
@@ -32,7 +31,6 @@ const Catalog = () => {
   if (clients.length === 0 && loadingStatus === LoadingStatus.Successed) {
     return (
       <>
-        <Heading>Client List</Heading>
         <span>Oops... No client found:(</span>
       </>
     );
