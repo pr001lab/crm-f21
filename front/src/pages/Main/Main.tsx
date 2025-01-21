@@ -40,12 +40,7 @@ const Main = () => {
   return (
     <>
       <Heading>Client List</Heading>
-      <Heading level='h6'>
-        Search by name{' '}
-        <span style={{ color: 'red' }}>
-          (регистрозависимый из-за кириллицы)
-        </span>
-      </Heading>
+      <Heading level='h6'>Search by name</Heading>
       <SearchForm />
       <Catalog />
     </>
