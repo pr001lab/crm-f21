@@ -23,17 +23,19 @@ function CatalogItem(client: IClientProps) {
       <td>{company}</td>
       <td>{email}</td>
       <td className='align-middle'>
-        <Link className='mx-1' to={`${AppRoute.Client}/${documentId}`}>
-          Edit
-        </Link>
-        {'|'}
-        <Button
-          variant='link'
-          className='px-1 py-0'
-          onClick={() => onDeleteClick()}
-        >
-          Delete
-        </Button>
+        <div className='d-flex aligh-items-center'>
+          <Link className='mx-1' to={`${AppRoute.Client}/${documentId}`}>
+            Edit
+          </Link>
+          {'|'}
+          <Button
+            variant='link'
+            className='px-1 py-0 border-0'
+            onClick={() => onDeleteClick()}
+          >
+            Delete
+          </Button>
+        </div>
       </td>
     </tr>
   );
